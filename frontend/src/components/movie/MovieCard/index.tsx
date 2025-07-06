@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Card,
   CardContent,
   CardMedia,
   Typography,
@@ -20,6 +19,7 @@ import {
   selectGenres,
 } from "store/slices/moviesSlice";
 import { openMovieModal } from "store/slices/uiSlice";
+import { MovieCardContainer } from "./styles";
 
 interface MovieCardProps {
   movie: Movie;
@@ -63,20 +63,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
   };
 
   return (
-    <Card
-      sx={{
-        height: "100%",
-        display: "flex",
-        flexDirection: "row",
-        cursor: "pointer",
-        transition: "transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out",
-        "&:hover": {
-          transform: "translateY(-2px)",
-          boxShadow: 4,
-        },
-      }}
-      onClick={handleCardClick}
-    >
+    <MovieCardContainer onClick={handleCardClick}>
       <Box sx={{ position: "relative", width: 120, flexShrink: 0 }}>
         <CardMedia
           component="img"
@@ -270,7 +257,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
           </Typography>
         </Box>
       </CardContent>
-    </Card>
+    </MovieCardContainer>
   );
 };
 
