@@ -111,10 +111,10 @@ const Sidebar: React.FC<SidebarProps> = ({ genres, isLoading = false }) => {
         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
           <FilterList color="primary" />
           <Typography variant="h6" fontWeight="bold">
-            Filters
+            Movie Filters
           </Typography>
         </Box>
-        <IconButton onClick={handleClose} size="small">
+        <IconButton onClick={handleClose} size="small" aria-label="close">
           <Close />
         </IconButton>
       </Box>
@@ -196,24 +196,30 @@ const Sidebar: React.FC<SidebarProps> = ({ genres, isLoading = false }) => {
               </Typography>
             ) : (
               <FormGroup>
-                {genres.map((genre) => (
-                  <FormControlLabel
-                    key={genre.id}
-                    control={
-                      <Checkbox
-                        checked={selectedGenres.includes(genre.id)}
-                        onChange={() => handleGenreToggle(genre.id)}
-                        size="small"
-                      />
-                    }
-                    label={genre.name}
-                    sx={{
-                      "& .MuiFormControlLabel-label": {
-                        fontSize: "0.875rem",
-                      },
-                    }}
-                  />
-                ))}
+                {genres && genres.length > 0 ? (
+                  genres.map((genre) => (
+                    <FormControlLabel
+                      key={genre.id}
+                      control={
+                        <Checkbox
+                          checked={selectedGenres.includes(genre.id)}
+                          onChange={() => handleGenreToggle(genre.id)}
+                          size="small"
+                        />
+                      }
+                      label={genre.name}
+                      sx={{
+                        "& .MuiFormControlLabel-label": {
+                          fontSize: "0.875rem",
+                        },
+                      }}
+                    />
+                  ))
+                ) : (
+                  <Typography variant="body2" color="text.secondary">
+                    No genres available
+                  </Typography>
+                )}
               </FormGroup>
             )}
           </AccordionDetails>

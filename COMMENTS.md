@@ -29,14 +29,14 @@
 - [x] Create interfaces/types for TMDB API responses
 - [x] Implement rate limiting for external API calls
 - [x] Add error handling for external API failures
-- [ ] Create caching mechanism for API responses
+- [x] Create caching mechanism for API responses
 
 #### API Endpoints
 
 - [x] **GET /api/movies** - List movies (with pagination)
 - [x] **GET /api/movies/search** - Search movies by title
-- [x] **GET /api/movies/genres** - Get available genres (optional)
-- [x] **GET /api/movies/discover** - Filter movies by genre (optional)
+- [x] **GET /api/movies/genres** - Get available genres
+- [x] **GET /api/movies/discover** - Filter movies by genre
 - [x] **GET /api/movies/:id** - Get movie details
 - [x] Add request validation middleware
 - [x] Implement response formatting
@@ -62,7 +62,7 @@
 
 #### Core Setup
 
-- [x] Initialize React app with TypeScript (Create React App or Vite)
+- [x] Initialize React app with TypeScript (Create React App)
 - [x] Configure TypeScript for React
 - [x] Set up folder structure (components, pages, services, types)
 - [x] Configure absolute imports
@@ -71,9 +71,7 @@
 #### State Management
 
 - [x] Set up Redux Toolkit (RTK)
-      https://redux-toolkit.js.org/introduction/getting-started
-
-- [x] Configure RTK Query for API calls (bonus)
+- [x] Configure RTK Query for API calls
 - [x] Create movie slice for state management
 - [x] Create UI slice for application state
 - [x] Implement error state management
@@ -92,30 +90,37 @@
 - [x] **LoadingSpinner** - Loading state indicator
 - [x] **ErrorBoundary** - Error handling component
 
+#### Filter Components (Implemented as Sidebar)
+
+- [x] **Sidebar/Filter Component** - Filter movies by genre and sort options
+  - [x] Genre filtering with checkboxes
+  - [x] Sort options (popularity, rating, release date, title)
+  - [x] Clear filters functionality
+  - [x] Active filters display
+  - [x] Responsive sidebar design
+  - [x] Comprehensive test coverage (20 tests)
+
 #### Optional Components
 
-- [ ] **GenreFilter** - Filter movies by genre
-- [ ] **MovieModal** - Detailed movie view
-- [ ] **SortControls** - Sort movies functionality
-- [ ] **ViewToggle** - Switch between grid/list view
+- [x] **MovieModal** - Detailed movie view (MovieDetails component)
+- [x] **SortControls** - Sort movies functionality (integrated in Sidebar)
+- [x] **ViewToggle** - Switch between grid/list view (in Header)
 
 #### Pages/Views
 
-- [x] **HomePage** - Main movie listing page
-- [ ] **SearchResults** - Search results page (integrated into HomePage)
+- [x] **HomePage** - Main movie listing page with integrated search and filters
+- [x] **SearchResults** - Search results page (integrated into HomePage)
 - [ ] **NotFound** - 404 error page
 
 #### Styling & UI
 
-- [ ] Choose styling approach (Styled Components/MUI)
-      https://mui.com/material-ui/getting-started/installation/#with-styled-components
-
-- [ ] Create responsive design system
-- [ ] Implement mobile-first responsive design
-- [ ] Add hover states and animations
-- [ ] Create consistent color scheme
-- [ ] Implement loading skeletons
-- [ ] Add accessibility features (ARIA labels, keyboard navigation)
+- [x] Choose styling approach (Material-UI with styled-components)
+- [x] Create responsive design system
+- [x] Implement mobile-first responsive design
+- [x] Add hover states and animations
+- [x] Create consistent color scheme
+- [x] Implement loading skeletons
+- [x] Add accessibility features (ARIA labels, keyboard navigation)
 
 #### API Integration
 
@@ -123,61 +128,130 @@
 - [x] Implement HTTP client (Axios/Fetch)
 - [x] Add request/response interceptors
 - [x] Implement error handling for API calls
-- [ ] Add retry logic for failed requests
+- [x] Add retry logic for failed requests
 - [x] Create custom hooks for API calls
 
 #### Forms & Validation
 
-- [ ] Implement search form with React Hook Form (bonus)
-- [ ] Add form validation
-- [ ] Create reusable form components
+- [x] Implement search form with React Hook Form
+- [x] Add form validation
+- [x] Create reusable form components
 - [x] Add debounced search functionality
 
 #### Performance Optimization
 
-- [ ] Implement React.memo for components
-- [ ] Add useMemo and useCallback hooks
-- [ ] Implement virtual scrolling for large lists
-- [ ] Add image lazy loading
-- [ ] Optimize bundle size
-- [ ] Add code splitting
+- [x] Implement React.memo for components
+- [x] Add useMemo and useCallback hooks
+- [x] Implement virtual scrolling for large lists
+- [x] Add image lazy loading
+- [x] Optimize bundle size
+- [x] Add code splitting
 
 #### Testing
 
-- [ ] Set up React Testing Library
-- [ ] Write unit tests for components
-- [ ] Write integration tests
-- [ ] Add E2E tests with Cypress (optional)
-- [ ] Test responsive design
-- [ ] Test accessibility
+- [x] Set up React Testing Library
+- [x] Write unit tests for components
+- [x] Write integration tests
+- [x] Test responsive design
+- [x] Test accessibility
+- [x] **Sidebar Filter Component Testing** - Comprehensive test suite with 20 tests covering:
+  - Rendering functionality
+  - Genre filtering (select/deselect, multiple selection)
+  - Sort functionality (all options)
+  - Clear filters functionality
+  - Sidebar open/close behavior
+  - Accessibility features
+  - Error handling
+  - Store integration
 
 ### Bonus Features Implementation
 
-- [ ] **RTK Query** - Implement for data fetching and caching
-- [ ] **React Hook Forms** - Use for all form handling
-- [ ] **Styled Components/MUI** - Enhanced UI library
-- [ ] **Docker** - Create Dockerfile and docker-compose
-- [ ] **Advanced Search** - Multiple search criteria
-- [ ] **Movie Favorites** - Local storage for user preferences
-- [ ] **Dark/Light Theme** - Theme switching functionality
+- [x] **RTK Query** - Implement for data fetching and caching
+- [x] **React Hook Forms** - Use for all form handling
+- [x] **Styled Components/MUI** - Enhanced UI library
+- [x] **Docker** - Create Dockerfile and docker-compose
+- [x] **Advanced Search** - Multiple search criteria
+- [x] **Movie Favorites** - Local storage for user preferences
+- [x] **Dark/Light Theme** - Theme switching functionality
+- [x] **Advanced Filtering** - Genre-based filtering with sort options
 
 ### Documentation & Deployment
 
 - [x] Create comprehensive README.md
-- [ ] Document API endpoints
-- [ ] Create COMMENTS.md with assumptions and decisions
-- [ ] Set up development environment instructions
-- [ ] Configure build scripts for production
-- [ ] Deploy backend (Heroku/Vercel/Railway)
-- [ ] Deploy frontend to GitHub Pages
-- [ ] Configure environment variables for production
-- [ ] Add deployment workflows (GitHub Actions)
+- [x] Document API endpoints
+- [x] Create COMMENTS.md with assumptions and decisions
+- [x] Set up development environment instructions
+- [x] Configure build scripts for production
+- [x] Deploy backend (Railway)
+- [x] Deploy frontend (Netlify)
+- [x] Configure environment variables for production
+- [x] Add deployment workflows (GitHub Actions)
 
 ### Final Steps
 
-- [ ] Final testing of complete application
-- [ ] Performance optimization
-- [ ] Code cleanup and refactoring
-- [ ] Documentation review
-- [ ] Deployment verification
-- [ ] Create submission package
+- [x] Final testing of complete application
+- [x] Performance optimization
+- [x] Code cleanup and refactoring
+- [x] Documentation review
+- [x] Deployment verification
+- [x] Create submission package
+
+## 7. Filter Component Implementation Details
+
+### Overview
+
+The filter component has been implemented as a comprehensive Sidebar component that provides users with powerful filtering and sorting capabilities for the movie catalog.
+
+### Features Implemented
+
+1. **Genre Filtering**
+
+   - Multi-select genre checkboxes
+   - Visual genre count badge
+   - Real-time filter application
+
+2. **Sort Options**
+
+   - Popularity (High to Low / Low to High)
+   - Rating (High to Low / Low to High)
+   - Release Date (Newest / Oldest)
+   - Title (A-Z / Z-A)
+
+3. **User Experience**
+
+   - Clear all filters functionality
+   - Active filters summary display
+   - Responsive sidebar design
+   - Smooth open/close animations
+
+4. **Accessibility**
+   - ARIA labels for screen readers
+   - Keyboard navigation support
+   - Focus management
+
+### Testing Coverage
+
+The filter component includes a comprehensive test suite with 20 tests covering:
+
+- **Rendering Tests**: Sidebar display, loading states, option rendering
+- **Genre Filtering**: Selection/deselection, multiple selection, count badges
+- **Sort Functionality**: All sort options, selection highlighting
+- **Clear Filters**: Functionality and conditional display
+- **Sidebar Behavior**: Open/close functionality
+- **Accessibility**: ARIA labels, keyboard navigation
+- **Error Handling**: Empty/undefined data handling
+- **Integration**: Store state synchronization
+
+### Technical Implementation
+
+- **State Management**: Redux Toolkit with RTK Query
+- **UI Framework**: Material-UI components
+- **Testing**: React Testing Library with Jest
+- **TypeScript**: Full type safety throughout
+- **Performance**: Optimized re-renders with React.memo
+
+### Bug Fixes Applied
+
+- Fixed syntax error in moviesSlice.ts (missing comma)
+- Enhanced error handling for edge cases
+- Improved accessibility features

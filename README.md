@@ -24,6 +24,24 @@ Movie library application built with **NestJS** backend and **React TypeScript**
 - **Testing**: Comprehensive test coverage
 - **Docker**: Containerized deployment (optional)
 
+## 📸 Application Screenshots
+
+### Main Interface
+
+![Movie Library Main Interface](frontend/public/images/top-dark.png)
+
+### Advanced Filtering System
+
+![Movie Filtering Options](frontend/public/images/movie-filter.png)
+
+### Movie Details View
+
+![Movie Details Modal](frontend/public/images/movie-details.png)
+
+### Complete Application View
+
+![Full Application Interface](frontend/public/images/bottom-dark.png)
+
 ## Project Structure
 
 ```
@@ -416,3 +434,4 @@ Given more time, the following enhancements would be implemented:
 - **Advanced Filtering**: Multiple filter combinations and sorting options
 - **Internationalization**: Multi-language support
 - **Database Integration**: PostgreSQL for additional data storage
+- **Deploy backend**: Deploy backend to cloud service
