@@ -8,12 +8,7 @@ import {
   IconButton,
   Stack,
 } from "@mui/material";
-import {
-  GitHub,
-  LinkedIn,
-  Movie as MovieIcon,
-  Favorite,
-} from "@mui/icons-material";
+import { GitHub, LinkedIn, Movie as MovieIcon } from "@mui/icons-material";
 
 interface FooterProps {
   showSocialLinks?: boolean;
