@@ -56,13 +56,13 @@ const HomePage: React.FC = () => {
     skip: isSearchMode || isFilterMode,
   });
 
-  // Search movies query (lazy)
+  // Search movies query
   const [
     searchMovies,
     { data: searchMoviesData, isLoading: isLoadingSearch, error: searchError },
   ] = useLazySearchMoviesQuery();
 
-  // Discover movies query (lazy)
+  // Discover movies query
   const [
     discoverMovies,
     {
@@ -92,7 +92,6 @@ const HomePage: React.FC = () => {
         });
       } else {
         setIsSearchMode(false);
-        // Check if we should switch to filter mode
         if (
           selectedGenres.length > 0 ||
           releaseYear ||
@@ -159,25 +158,20 @@ const HomePage: React.FC = () => {
     ]
   );
 
-  // Handle movie click (for future modal/details)
   const handleMovieClick = useCallback((movie: Movie) => {
     console.log("Movie clicked:", movie);
-    // Future: Open movie details modal or navigate to details page
   }, []);
 
-  // Handle modal close
   const handleCloseModal = useCallback(() => {
     dispatch(closeModal());
   }, [dispatch]);
 
-  // Effect to store genres in Redux store
   useEffect(() => {
     if (genresData?.data) {
       dispatch(setGenres(genresData.data));
     }
   }, [genresData, dispatch]);
 
-  // Effect to handle filter changes
   useEffect(() => {
     if (!isSearchMode && !currentSearchQuery) {
       const hasFilters =

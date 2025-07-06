@@ -69,17 +69,13 @@ export const storage = {
   set: <T>(key: string, value: T): void => {
     try {
       localStorage.setItem(key, JSON.stringify(value));
-    } catch {
-      // Handle storage errors silently
-    }
+    } catch {}
   },
 
   remove: (key: string): void => {
     try {
       localStorage.removeItem(key);
-    } catch {
-      // Handle storage errors silently
-    }
+    } catch {}
   },
 };
 

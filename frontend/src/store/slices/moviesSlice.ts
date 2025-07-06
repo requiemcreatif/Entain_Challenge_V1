@@ -125,7 +125,6 @@ export const {
 
 export default moviesSlice.reducer;
 
-// Selectors
 export const selectSelectedMovie = (state: { movies: MoviesState }) =>
   state.movies.selectedMovie;
 export const selectFavorites = (state: { movies: MoviesState }) =>

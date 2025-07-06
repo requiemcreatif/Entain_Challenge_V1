@@ -1,7 +1,20 @@
 import React from "react";
-import { Box, Typography, Alert, Skeleton } from "@mui/material";
+import { Typography } from "@mui/material";
 import { Movie } from "types/movie.types";
 import MovieCard from "../MovieCard";
+import {
+  MovieListContainer,
+  LoadingContainer,
+  MovieGrid,
+  MovieListView,
+  ErrorContainer,
+  ErrorAlert,
+  EmptyStateContainer,
+  SkeletonCard,
+  SkeletonImage,
+  SkeletonText,
+  SkeletonTextShort,
+} from "./styles";
 
 interface MovieListProps {
   movies: Movie[];
@@ -12,6 +25,35 @@ interface MovieListProps {
   emptyMessage?: string;
 }
 
+// Loading skeleton item component
+const SkeletonItem: React.FC = () => (
+  <SkeletonCard>
+    <SkeletonImage variant="rectangular" height={200} />
+    <SkeletonText variant="text" height={24} />
+    <SkeletonTextShort variant="text" height={16} />
+    <SkeletonText variant="text" height={40} />
+  </SkeletonCard>
+);
+
+// Movies renderer component
+const MoviesRenderer: React.FC<{
+  movies: Movie[];
+  viewMode: "grid" | "list";
+  onMovieClick?: (movie: Movie) => void;
+}> = ({ movies, viewMode, onMovieClick }) => {
+  const movieCards = movies.map((movie) => (
+    <MovieCard key={movie.id} movie={movie} onClick={onMovieClick} />
+  ));
+
+  const Container = viewMode === "grid" ? MovieGrid : MovieListView;
+
+  return (
+    <MovieListContainer>
+      <Container>{movieCards}</Container>
+    </MovieListContainer>
+  );
+};
+
 const MovieList: React.FC<MovieListProps> = ({
   movies,
   isLoading = false,
@@ -20,108 +62,54 @@ const MovieList: React.FC<MovieListProps> = ({
   viewMode = "grid",
   emptyMessage = "No movies found",
 }) => {
+  // Loading state
   if (isLoading) {
     return (
-      <Box sx={{ py: 4 }}>
-        <Box
-          sx={{
-            display: "grid",
-            gridTemplateColumns: {
-              xs: "repeat(1, 1fr)",
-              sm: "repeat(2, 1fr)",
-              md: "repeat(2, 1fr)",
-              lg: "repeat(3, 1fr)",
-              xl: "repeat(3, 1fr)",
-            },
-            gap: 2,
-          }}
-        >
-          {Array.from({ length: 9 }).map((_, index) => (
-            <Box key={index}>
-              <Skeleton
-                variant="rectangular"
-                height={200}
-                sx={{ borderRadius: 1, mb: 1 }}
-              />
-              <Skeleton variant="text" height={24} />
-              <Skeleton variant="text" height={16} width="60%" />
-              <Skeleton variant="text" height={40} />
-            </Box>
+      <LoadingContainer>
+        <MovieGrid>
+          {Array.from({ length: 9 }, (_, index) => (
+            <SkeletonItem key={index} />
           ))}
-        </Box>
-      </Box>
+        </MovieGrid>
+      </LoadingContainer>
     );
   }
 
+  // Error state
   if (error) {
     return (
-      <Box sx={{ py: 4 }}>
-        <Alert severity="error" sx={{ mb: 2 }}>
+      <ErrorContainer>
+        <ErrorAlert severity="error">
           <Typography variant="h6" gutterBottom>
             Error Loading Movies
           </Typography>
           <Typography variant="body2">{error}</Typography>
-        </Alert>
-      </Box>
+        </ErrorAlert>
+      </ErrorContainer>
     );
   }
 
+  // Empty state
   if (!movies || movies.length === 0) {
     return (
-      <Box
-        sx={{
-          py: 8,
-          textAlign: "center",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+      <EmptyStateContainer>
         <Typography variant="h5" color="text.secondary" gutterBottom>
           {emptyMessage}
         </Typography>
         <Typography variant="body1" color="text.secondary">
           Try adjusting your search or filters
         </Typography>
-      </Box>
+      </EmptyStateContainer>
     );
   }
 
-  // Grid view
-  if (viewMode === "grid") {
-    return (
-      <Box sx={{ py: 2 }}>
-        <Box
-          sx={{
-            display: "grid",
-            gridTemplateColumns: {
-              xs: "repeat(1, 1fr)",
-              sm: "repeat(2, 1fr)",
-              md: "repeat(2, 1fr)",
-              lg: "repeat(3, 1fr)",
-              xl: "repeat(3, 1fr)",
-            },
-            gap: 2,
-          }}
-        >
-          {movies.map((movie) => (
-            <MovieCard key={movie.id} movie={movie} onClick={onMovieClick} />
-          ))}
-        </Box>
-      </Box>
-    );
-  }
-
-  // List view
+  // Render movies
   return (
-    <Box sx={{ py: 2 }}>
-      <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-        {movies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} onClick={onMovieClick} />
-        ))}
-      </Box>
-    </Box>
+    <MoviesRenderer
+      movies={movies}
+      viewMode={viewMode}
+      onMovieClick={onMovieClick}
+    />
   );
 };
 

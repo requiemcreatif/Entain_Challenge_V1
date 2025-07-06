@@ -10,11 +10,9 @@ import {
   DiscoverParams,
 } from "../../types/movie.types";
 
-// Define the base URL for our API
 const API_BASE_URL =
   process.env.REACT_APP_API_URL || "http://localhost:3000/api";
 
-// Define the RTK Query API
 export const moviesApi = createApi({
   reducerPath: "moviesApi",
   baseQuery: fetchBaseQuery({
@@ -90,7 +88,6 @@ export const moviesApi = createApi({
   }),
 });
 
-// Export hooks for usage in functional components
 export const {
   useGetPopularMoviesQuery,
   useSearchMoviesQuery,
