@@ -188,7 +188,7 @@ const Footer: React.FC<FooterProps> = ({
             }}
           >
             <Typography variant="body2">Made with</Typography>
-            <Favorite sx={{ fontSize: 16, color: "error.main" }} />
+
             <Typography variant="body2">using React & TypeScript</Typography>
           </Box>
         </Box>
