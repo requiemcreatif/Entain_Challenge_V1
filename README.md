@@ -38,7 +38,7 @@ Movie library application built with **NestJS** backend and **React TypeScript**
 
 ![Movie Details Modal](frontend/public/images/movie-details.png)
 
-### Complete Application View
+### Bottom and Footer View
 
 ![Full Application Interface](frontend/public/images/bottom-dark.png)
 
