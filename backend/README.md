@@ -1,99 +1,257 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Movie Library Backend
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+NestJS backend service for the Movie Library application, providing a RESTful API that integrates with The Movie Database (TMDB) API.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 🚀 Quick Start
 
-## Description
+### Prerequisites
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- **Node.js** (v18 or higher)
+- **npm** or **yarn**
+- **TMDB API Key** - Get one free at [themoviedb.org](https://www.themoviedb.org/documentation/api)
 
-## Project setup
+### Installation
 
 ```bash
-$ npm install
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.example .env
 ```
 
-## Compile and run the project
+### Environment Configuration
+
+Edit `.env` file and add your TMDB API key:
+
+```env
+TMDB_API_KEY=your_actual_api_key_here
+NODE_ENV=development
+PORT=3000
+FRONTEND_URL=http://localhost:3001
+TMDB_BASE_URL=https://api.themoviedb.org/3
+```
+
+### Running the Application
 
 ```bash
-# development
-$ npm run start
+# Development mode (with hot reload)
+npm run start:dev
 
-# watch mode
-$ npm run start:dev
+# Production mode
+npm run build
+npm run start:prod
 
-# production mode
-$ npm run start:prod
+# Debug mode
+npm run start:debug
 ```
 
-## Run tests
+The server will start on `http://localhost:3000`
+
+## 📚 API Documentation
+
+Once the server is running, you can access the interactive API documentation at:
+**http://localhost:3000/api/docs**
+
+### Available Endpoints
+
+#### Movies
+
+- **GET** `/api/movies` - Get popular movies
+  - Query params: `page` (optional, default: 1)
+  - Response: Paginated list of movies
+
+- **GET** `/api/movies/search` - Search movies by title
+  - Query params: `query` (required), `page` (optional)
+  - Response: Search results with pagination
+
+- **GET** `/api/movies/:id` - Get detailed movie information
+  - Path params: `id` (movie ID)
+  - Response: Detailed movie object
+
+- **GET** `/api/movies/genres` - Get available movie genres
+  - Response: List of genre objects
+
+- **GET** `/api/movies/discover` - Discover movies with filters
+  - Query params: `with_genres`, `page`, `sort_by`, etc.
+  - Response: Filtered movie results
+
+#### Health Check
+
+- **GET** `/` - Basic health check
+  - Response: "Hello World!" message
+
+## 🔧 Development
+
+### Project Structure
+
+```
+backend/
+├── src/
+│   ├── movies/          # Movies module
+│   │   ├── movies.controller.ts
+│   │   ├── movies.service.ts
+│   │   └── movies.module.ts
+│   ├── tmdb/            # TMDB API integration
+│   │   ├── tmdb.service.ts
+│   │   └── tmdb.module.ts
+│   ├── types/           # TypeScript interfaces
+│   │   └── movie.interface.ts
+│   ├── app.module.ts    # Root module
+│   └── main.ts          # Application entry point
+├── test/                # E2E tests
+├── .env.example         # Environment template
+└── package.json
+```
+
+### Testing
 
 ```bash
-# unit tests
-$ npm run test
+# Unit tests
+npm run test
 
-# e2e tests
-$ npm run test:e2e
+# E2E tests
+npm run test:e2e
 
-# test coverage
-$ npm run test:cov
+# Test coverage
+npm run test:cov
+
+# Watch mode
+npm run test:watch
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### Code Quality
 
 ```bash
-$ npm install -g mau
-$ mau deploy
+# Linting
+npm run lint
+
+# Formatting
+npm run format
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+## 🐳 Docker Support
 
-## Resources
+### Using Docker
 
-Check out a few resources that may come in handy when working with NestJS:
+```bash
+# Build image
+docker build -t movie-backend .
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+# Run container
+docker run -p 3000:3000 --env-file .env movie-backend
+```
 
-## Support
+### Using Docker Compose (from project root)
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
+# Run both backend and frontend
+docker-compose up --build
 
-## Stay in touch
+# Backend only
+docker-compose up backend
+```
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## 🔒 Security & Rate Limiting
 
-## License
+The API includes:
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+- **CORS** protection (configurable origins)
+- **Rate limiting** (100 requests per minute by default)
+- **Input validation** using class-validator
+- **Request sanitization**
+
+## 🌍 Environment Variables
+
+| Variable         | Description                  | Default                        |
+| ---------------- | ---------------------------- | ------------------------------ |
+| `TMDB_API_KEY`   | Your TMDB API key (required) | -                              |
+| `NODE_ENV`       | Environment mode             | `development`                  |
+| `PORT`           | Server port                  | `3000`                         |
+| `FRONTEND_URL`   | Frontend URL for CORS        | `http://localhost:3001`        |
+| `TMDB_BASE_URL`  | TMDB API base URL            | `https://api.themoviedb.org/3` |
+| `RATE_LIMIT_TTL` | Rate limit window (seconds)  | `60`                           |
+| `RATE_LIMIT_MAX` | Max requests per window      | `100`                          |
+
+## 🚀 Deployment
+
+### Production Build
+
+```bash
+npm run build
+npm run start:prod
+```
+
+### Deployment Platforms
+
+The backend can be deployed to:
+
+- **Heroku** (recommended for beginners)
+- **Railway** (simple deployment)
+- **Vercel** (serverless)
+- **DigitalOcean App Platform**
+- **AWS/GCP/Azure** (for advanced users)
+
+### Heroku Deployment Example
+
+```bash
+# Install Heroku CLI
+# Create Heroku app
+heroku create your-app-name
+
+# Set environment variables
+heroku config:set TMDB_API_KEY=your_api_key_here
+heroku config:set NODE_ENV=production
+heroku config:set FRONTEND_URL=https://your-frontend-url.com
+
+# Deploy
+git push heroku main
+```
+
+## 📊 Monitoring & Logging
+
+The application includes:
+
+- Request/response logging
+- Error handling and logging
+- Performance monitoring ready
+- Health check endpoint
+
+## 🔍 Troubleshooting
+
+### Common Issues
+
+1. **"TMDB API key not found"**
+   - Make sure `.env` file exists with `TMDB_API_KEY`
+   - Verify your API key is valid
+
+2. **CORS errors**
+   - Check `FRONTEND_URL` in `.env`
+   - Ensure frontend URL matches the environment variable
+
+3. **Rate limiting**
+   - Adjust `RATE_LIMIT_TTL` and `RATE_LIMIT_MAX` in `.env`
+   - Consider implementing API key-based rate limiting
+
+4. **Port already in use**
+   - Change `PORT` in `.env` or stop other services using port 3000
+
+### Debug Mode
+
+```bash
+npm run start:debug
+```
+
+Then attach your debugger to the Node.js process.
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch
+3. Write tests for your changes
+4. Ensure all tests pass
+5. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License.
