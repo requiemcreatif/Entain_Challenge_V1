@@ -392,7 +392,6 @@ describe("Sidebar Filter Component", () => {
       );
 
       // When sidebar is closed, the content is still rendered but hidden
-      // This is expected behavior for MUI Drawer component
       expect(screen.getByText("Movie Filters")).toBeInTheDocument();
 
       // Verify the sidebar state in the store is closed
@@ -471,7 +470,7 @@ describe("Sidebar Filter Component", () => {
         </TestWrapper>
       );
 
-      // Initially Action should be checked
+      // Initially Action to be checked
       expect(screen.getByLabelText("Action")).toBeChecked();
 
       // Manually update store
